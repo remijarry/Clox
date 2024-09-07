@@ -2,22 +2,22 @@ namespace Clox;
 
 public class Token
 {
-  internal readonly TokenType _type;
-  internal readonly string _lexeme;
-  internal readonly object _literal;
-  internal readonly int _line;
+  public TokenType Type { get; }
+  public string Lexeme { get; }
+  public object Literal { get; }
+  public int Line { get; }
 
   public Token(TokenType type, string lexeme, object literal, int line)
   {
-    _type = type;
-    _lexeme = lexeme;
-    _literal = literal;
-    _line = line;
+    Type = type;
+    Lexeme = lexeme;
+    Literal = literal;
+    Line = line;
   }
 
-    public override string ToString()
-    {
-        return _type + " " + _lexeme + " " + _literal;
-    }
+  public override string ToString()
+  {
+    return Type + " " + Lexeme + " " + Literal;
+  }
 
 }

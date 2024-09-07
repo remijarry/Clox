@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using Clox.Printer;
+using static Clox.Expr;
 
 namespace Clox;
 
@@ -7,19 +9,30 @@ public class Program
     static bool hadError;
     static void Main(string[] args)
     {
-        if (args.Length > 1)
-        {
-            Console.WriteLine("Usage: clox [script]");
-            Environment.Exit(64);
-        }
-        if (args.Length == 1)
-        {
-            RunFile(args[0]);
-        }
-        else
-        {
-            RunPrompt();
-        }
+        // if (args.Length > 1)
+        // {
+        //     Console.WriteLine("Usage: clox [script]");
+        //     Environment.Exit(64);
+        // }``
+        // if (args.Length == 1)
+        // {
+        //     RunFile(args[0]);
+        // }
+        // else
+        // {
+        //     RunPrompt();
+        // }
+
+        var expression = new Binary(
+            new Unary(
+                new Token(TokenType.MINUS, "-", null, 1),
+                new Literal(123)),
+            new(TokenType.STAR, "*", null, 1),
+            new Grouping(
+                new Literal(45.67)
+            ));
+        var astPrinter = new AstPrinter();
+        Console.WriteLine(astPrinter.Print(expression));
     }
 
     private static void RunFile(string path)
@@ -40,7 +53,7 @@ public class Program
 
     private static void RunPrompt()
     {
-        for(;;)
+        for (; ; )
         {
             Console.WriteLine("> ");
             string line = Console.ReadLine();
