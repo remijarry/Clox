@@ -9,30 +9,19 @@ public class Program
     static bool hadError;
     static void Main(string[] args)
     {
-        // if (args.Length > 1)
-        // {
-        //     Console.WriteLine("Usage: clox [script]");
-        //     Environment.Exit(64);
-        // }``
-        // if (args.Length == 1)
-        // {
-        //     RunFile(args[0]);
-        // }
-        // else
-        // {
-        //     RunPrompt();
-        // }
-
-        var expression = new Binary(
-            new Unary(
-                new Token(TokenType.MINUS, "-", null, 1),
-                new Literal(123)),
-            new(TokenType.STAR, "*", null, 1),
-            new Grouping(
-                new Literal(45.67)
-            ));
-        var astPrinter = new AstPrinter();
-        Console.WriteLine(astPrinter.Print(expression));
+        if (args.Length > 1)
+        {
+            Console.WriteLine("Usage: clox [script]");
+            Environment.Exit(64);
+        }
+        if (args.Length == 1)
+        {
+            RunFile(args[0]);
+        }
+        else
+        {
+            RunPrompt();
+        }
     }
 
     private static void RunFile(string path)
@@ -77,6 +66,8 @@ public class Program
             Console.WriteLine(token);
         }
     }
+
+
 
     public static void Error(int line, string message)
     {

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Clox;
 
 public class Scanner
